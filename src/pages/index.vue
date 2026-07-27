@@ -11,7 +11,7 @@
     </q-header>
 
     <q-drawer v-model="drawer" show-if-above :mini="miniState" @mouseenter="handleMouseEnter"
-      @mouseleave="handleMouseLeave" :width="300" :breakpoint="500" bordered>
+      @mouseleave="handleMouseLeave" :width="300" :breakpoint="500" bordered mini-to-overlay>
       <q-list>
         <EssentialLink v-for="link in linksList" :key="link.label" v-bind="link" />
       </q-list>
