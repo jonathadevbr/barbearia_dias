@@ -1,23 +1,30 @@
 <template>
-  <q-layout view="hHh Lpr lFf">
-    <q-header elevated class="bg-black text-white">
-      <q-toolbar>
-        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleDrawer" class="q-mr-sm lt-md" />
+  <q-layout view="lHh Lpr lff">
 
-        <q-toolbar-title> Barbearia Dias </q-toolbar-title>
+    <q-header class="text-white q-pa-md" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%); box-shadow: none;">
+      <q-toolbar class="row justify-between items-center relative-position">
+        <q-btn v-if="$q.screen.lt.md" flat dense round icon="menu" aria-label="Menu" @click="toggleDrawer" />
 
-        <div class="gt-xs">O melhor para você e seu cabelo</div>
+        <div class="text-body1 text-weight-bold">BARBEARIA DIAS</div>
+
+        <q-tabs v-if="$q.screen.gt.sm" class="row justify-center">
+          <q-route-tab v-for="link in linksList" :key="link.label" :to="link.link" :label="link.label" />
+        </q-tabs>
+
+        <div>
+          <q-btn outline color="amber-7" label="AGENDAR" />
+        </div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="drawer" show-if-above :mini="miniState" @mouseenter="handleMouseEnter"
-      @mouseleave="handleMouseLeave" :width="300" :breakpoint="500" bordered mini-to-overlay>
+    <q-drawer v-model="drawer" :breakpoint="500" bordered class="lt-md">
       <q-list>
         <EssentialLink v-for="link in linksList" :key="link.label" v-bind="link" />
       </q-list>
     </q-drawer>
 
-    <q-page-container>
+    <!-- Page container sem padding superior para a imagem encostar no topo -->
+    <q-page-container style="padding-top: 0 !important;">
       <router-view />
     </q-page-container>
   </q-layout>
@@ -28,49 +35,14 @@ import { ref } from 'vue';
 import EssentialLink, { type EssentialLinkProps } from '@/components/EssentialLink.vue';
 
 const drawer = ref(false);
-const miniState = ref(true);
 
 const toggleDrawer = () => {
   drawer.value = !drawer.value;
 };
 
-const handleMouseEnter = () => {
-  if (window.innerWidth >= 500) {
-    miniState.value = false;
-  }
-};
-
-const handleMouseLeave = () => {
-  if (window.innerWidth >= 500) {
-    miniState.value = true;
-  }
-};
-
 const linksList: EssentialLinkProps[] = [
-  {
-    label: 'Quem somos',
-    icon: 'group',
-    link: '#',
-  },
-  {
-    label: 'Espaço',
-    icon: 'storefront',
-    link: '#',
-  },
-  {
-    label: 'Catálogo',
-    icon: 'content_cut',
-    link: '#',
-  },
-  {
-    label: 'Localização',
-    icon: 'place',
-    link: '#',
-  },
-  {
-    label: 'Redes sociais',
-    icon: 'share',
-    link: '#',
-  },
+  { label: 'Serviços', link: '#' },
+  { label: 'Barbeiro', link: '#' },
+  { label: 'Visite', link: '#' },
 ];
 </script>

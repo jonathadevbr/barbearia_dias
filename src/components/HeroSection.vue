@@ -1,6 +1,10 @@
 <template>
-  <q-page class="flex flex-center">
-    <h1>HeroSection</h1>
+  <q-page class="relative-position window-height">
+    <q-img
+      src="../assets/foto-barbearia.jpg"
+      fit="cover"
+      class="absolute-full"
+    />
   </q-page>
 </template>
 
